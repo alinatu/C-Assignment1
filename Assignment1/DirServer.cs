@@ -28,7 +28,7 @@ namespace Assignment1
 
                 while (true)
                 {
-                    DirServerThread serverThread = new DirServerThread(serverSocket);
+                    DirServerThread serverThread = new DirServerThread(serverSocket.Accept());
                 }
             }
 
