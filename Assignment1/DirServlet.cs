@@ -22,19 +22,19 @@ namespace Assignment1
         // Written by Alina
         private String GetListing(string path)
         {
-            DirectoryInfo di = new DirectoryInfo(path);
+            string[] allfiles = Directory.GetFileSystemEntries(path);
 
-            FileInfo[] fiArr = di.GetFiles();
             string files = "";
-            foreach (FileInfo fri in fiArr)
+            foreach (var file in allfiles)
             {
-                if (fri.Attributes.HasFlag(FileAttributes.Directory))
+                FileInfo info = new FileInfo(file);
+                if (info.Attributes.HasFlag(FileAttributes.Directory))
                 {
-                    files += "<li><button type=\"button\">" + fri.DirectoryName + "</button></li>";
+                    files += "<li><button type=\"button\">" + info.Name + "</button></li>";
                 }
                 else
                 {
-                    files += "<li>" + fri + "</li>";
+                    files += "<li>" + info.Name + "</li>";
                 }
             }
             return files;
