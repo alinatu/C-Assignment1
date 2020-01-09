@@ -7,9 +7,11 @@ using System.Diagnostics;
 namespace Assignment1
 
 {
+    // Reflection written by Evan & Kelvin
     public class DirServerThread
     {
         private Socket socket = null;
+        private Type servlet;
 
         // Written by Alina
         public DirServerThread(Socket socket)
@@ -24,7 +26,8 @@ namespace Assignment1
         {
             HTTPRequest request = new HTTPRequest(socket);
             HTTPResponse response = new HTTPResponse(socket);
-            DirServlet myServlet = new DirServlet();
+            servlet = typeof(DirServlet);
+            DirServlet myServlet = (DirServlet)Activator.CreateInstance(servlet);
             myServlet.DoGet(request, response);
         }
     }

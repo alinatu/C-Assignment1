@@ -12,7 +12,7 @@ namespace Assignment1
         // Written by Alina
         public override void DoGet(HTTPRequest request, HTTPResponse response)
         {
-            string output = "<!DOCTYPE html><html><body><ul>" + GetListing("/Users/alinatumaev/") + "</ul></body></html>";
+            string output = "<!DOCTYPE html><html><body><ul>" + GetListing("/") + "</ul></body></html>";
             response.Write(output);
         }
 
