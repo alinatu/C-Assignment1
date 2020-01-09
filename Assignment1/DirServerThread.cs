@@ -11,6 +11,7 @@ namespace Assignment1
     {
         private Socket socket = null;
 
+        // Written by Alina
         public DirServerThread(Socket socket)
         {
             this.socket = socket;
@@ -18,6 +19,7 @@ namespace Assignment1
             thread.Start();
         }
 
+        // Written by Alina
         public void Run()
         {
             HTTPRequest request = new HTTPRequest(socket);

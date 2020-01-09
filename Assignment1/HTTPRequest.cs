@@ -10,11 +10,13 @@ namespace Assignment1
     {
         private Socket socket;
 
+        //Written by Alina
         public HTTPRequest(Socket socket)
         {
             this.socket = socket;
         }
 
+        //Written by Alina
         public void Write()
         {
             string message = "";

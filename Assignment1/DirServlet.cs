@@ -9,6 +9,7 @@ namespace Assignment1
         {
         }
 
+        // Written by Alina
         public override void DoGet(HTTPRequest request, HTTPResponse response)
         {
             string output = "<!DOCTYPE html><html><body><ul>" + GetListing("/Users/alinatumaev/") + "</ul></body></html>";
@@ -17,6 +18,8 @@ namespace Assignment1
 
         public override void DoPost(HTTPRequest request, HTTPResponse response) { }
 
+
+        // Written by Alina
         private String GetListing(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
