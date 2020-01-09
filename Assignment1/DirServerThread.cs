@@ -11,11 +11,15 @@ namespace Assignment1
     public class DirServerThread
     {
         private Socket socket = null;
+<<<<<<< HEAD
         private Type servlet;
 
         // Written by Alina
+=======
+>>>>>>> Taylor's commit
         public DirServerThread(Socket socket)
         {
+            DirServer.serverLogger.Connection("Test");
             this.socket = socket;
             var thread = new Thread(new ThreadStart(this.Run));
             thread.Start();

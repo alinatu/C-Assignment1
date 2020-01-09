@@ -22,6 +22,7 @@ namespace Assignment1
                 "HTTP/1.0 200\r\nContent-Type: text/html;charset=ISO-8859-1\r\nContent-Length: "
                 + Encoding.ASCII.GetByteCount(response)
                 + "\r\n\r\nConnection: close\r\n\r\n" + response + "\r\n");
+<<<<<<< HEAD
 
             try
             {
@@ -29,6 +30,14 @@ namespace Assignment1
 
             }
             catch (Exception x) { }
+=======
+            try {
+                socket.Send(byResponse);
+            } catch(Exception ex)
+            {
+                DirServer.serverLogger.Error(ex.ToString());
+            }
+>>>>>>> Taylor's commit
         }
     }
 }

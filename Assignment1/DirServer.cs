@@ -2,14 +2,39 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Assignment1
 {
     public class DirServer
     {
         // Written by Alina
+        public static Logger serverLogger;
+
+        public static EventLog appLog;
+        
+        public static void EventLogger(string s)
+        {
+            appLog.WriteEntry(s);
+        }
+
         public static void Main(string[] args)
         {
+            serverLogger = new Logger();
+            appLog = new EventLog();
+            FileLogger fl = new FileLogger("dirServer.log");
+
+            if (!EventLog.SourceExists("DirServerSource"))
+                EventLog.CreateEventSource("DirServerSource", "DirServerLog");
+            appLog.Source = "DirServerSource";
+            appLog.Log = "DirServerLog";
+			
+            serverLogger = new Logger();
+
+            // Subscribe the Functions Logger and fl.Logger
+            serverLogger.Log += new Logger.LogHandler(EventLogger);
+            serverLogger.Log += new Logger.LogHandler(fl.Logger);
+
             // Establish the local endpoint  
             // for the socket. Dns.GetHostName 
             // returns the name of the host  
@@ -36,10 +61,11 @@ namespace Assignment1
             catch (Exception e)
             {
                 Console.Error.WriteLine(e + " Error creating Socket.");
+                serverLogger.Error(e.ToString());
             }
 
             serverSocket.Close();
-            
+            fl.Close();
         }
     }
 }
