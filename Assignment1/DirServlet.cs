@@ -12,11 +12,7 @@ namespace Assignment1
         // Written by Alina
         public override void DoGet(HTTPRequest request, HTTPResponse response)
         {
-<<<<<<< HEAD
-            string output = "<!DOCTYPE html><html><body><ul>" + GetListing("/") + "</ul></body></html>";
-=======
             string output = "<!DOCTYPE html><html><body><ul>" + GetListing("c:/Users/tlrla/") + "</ul></body></html>";
->>>>>>> Taylor's commit
             response.Write(output);
         }
 
