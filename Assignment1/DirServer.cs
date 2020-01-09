@@ -37,6 +37,7 @@ namespace Assignment1
                 Console.Error.WriteLine(e + " Error creating Socket.");
             }
 
+            serverSocket.Close();
             
         }
     }
