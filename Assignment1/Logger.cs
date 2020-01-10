@@ -12,9 +12,6 @@ public class Logger
         // Define an Event based on the above Delegate
         public event LogHandler Log;
 
-        // Instead of having the Process() function take a delegate
-        // as a parameter, we've declared a Log event. Call the Event,
-        // using the OnXXXX Method, where XXXX is the name of the Event.
         public void Error(string message)
         {
             OnLog("Logging Error: \n" + message);
@@ -25,7 +22,6 @@ public class Logger
 			OnLog("Connection made at: \n" + DateTime.Now.ToString("yyyy-MM-dd, HH:mm:ss tt"));
 		}
 
-        // By Default, create an OnXXXX Method, to call the Event
         protected void OnLog(string message)
         {
             if (Log != null)

@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace Assignment1
 {
@@ -13,6 +14,7 @@ namespace Assignment1
 
         public static EventLog appLog;
         
+        //Written by Taylor
         public static void EventLogger(string s)
         {
             appLog.WriteEntry(s);
@@ -20,19 +22,29 @@ namespace Assignment1
 
         public static void Main(string[] args)
         {
+            //Written by Taylor
             serverLogger = new Logger();
-            appLog = new EventLog();
             FileLogger fl = new FileLogger("dirServer.log");
 
-            if (!EventLog.SourceExists("DirServerSource"))
-                EventLog.CreateEventSource("DirServerSource", "DirServerLog");
-            appLog.Source = "DirServerSource";
-            appLog.Log = "DirServerLog";
-			
-            serverLogger = new Logger();
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Comp4945");
 
-            // Subscribe the Functions Logger and fl.Logger
-            serverLogger.Log += new Logger.LogHandler(EventLogger);
+            //Written by Taylor and Jason
+            //Checks if the registry key is set to allow for logging to Windows application logs
+            if ( rk != null && rk.GetValue("logEvents").ToString().Equals("true"))
+            {
+                appLog = new EventLog();
+
+                if (!EventLog.SourceExists("DirServerSource"))
+                    EventLog.CreateEventSource("DirServerSource", "DirServerLog");
+                appLog.Source = "DirServerSource";
+                appLog.Log = "DirServerLog";
+
+                serverLogger = new Logger();
+
+                // Subscribe the Event Logger
+                serverLogger.Log += new Logger.LogHandler(EventLogger);
+            }
+
             serverLogger.Log += new Logger.LogHandler(fl.Logger);
 
             // Establish the local endpoint  
