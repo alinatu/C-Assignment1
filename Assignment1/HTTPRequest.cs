@@ -9,6 +9,7 @@ namespace Assignment1
     public class HTTPRequest
     {
         private Socket socket;
+        private string userAgent;
 
         //Written by Alina
         public HTTPRequest(Socket socket)
@@ -17,7 +18,7 @@ namespace Assignment1
         }
 
         //Written by Alina
-        public void Write()
+        public string Write()
         {
             string message = "";
             byte[] bytesStored = new byte[socket.ReceiveBufferSize];
@@ -26,7 +27,7 @@ namespace Assignment1
             {
                 message += Convert.ToChar(bytesStored[i]).ToString();
             }
-            Console.WriteLine(message); // PRINT THE RESPONSE
+            return message; // PRINT THE RESPONSE
         }
     }
 
