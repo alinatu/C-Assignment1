@@ -62,7 +62,7 @@ namespace Assignment1
             try
             {
                 serverSocket.Bind(localEndPoint);
-                serverSocket.Listen(100);
+                serverSocket.Listen(CoreCount.CoreCounter());
 
                 while (true)
                 {
